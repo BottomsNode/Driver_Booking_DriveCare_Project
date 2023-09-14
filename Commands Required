@@ -1,0 +1,11 @@
+pip list --outdated
+pip install -U [PackageName]    U = Upgrade
+pip install -U -r requirements.txt
+pip install pipreqs [running pipreqs in the command line generates a requirements.txt file automatically] location [pipreqs /home/project/location]
+pip3 install phonenumbers
+
+pip install matplotlib
+pip install pydantic
+pip install django-phonenumber-field
+pip install requests
+pip install --pre xhtml2pdf

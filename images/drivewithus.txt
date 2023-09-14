@@ -1,0 +1,327 @@
+{% extends 'customer/layouts/base.html' %}
+{% load static %}
+    
+    {% block content %}
+    {% include 'customer/include/header.html' %}
+
+
+<div id="ajax_dashboard">
+    <section class="bg-half-170 d-table w-100" style="background: url('http://127.0.0.1:8000/static/images/busi.jpg') center center;">
+        <div class="container">
+            <div class="row align-items-center">            
+                <div class="col-lg-12 offset-lg-1 col-md-12 order-1 order-md-2">
+                    <div class="title-heading mt-4">
+                        <h3 class="display-4 fw-normal mb-3">Driver Registration</h3>
+                        <div class="mt-4 pt-2">
+                            <!--<a href="#filltheform" class="btn btn-primary mt-2"> View team !!</a> -->
+                        </div>
+                    </div>
+                </div><!--end col-->
+            </div><!--end row-->
+        </div><!--end container--> 
+    </section>
+    
+
+    <section class="section" style="background: #f7f7f7; padding-bottom: 50px;" id="filltheform" >
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-12 col-md-12 order-2 order-md-1 mt-4 pt-2 mt-sm-0 pt-sm-0">
+                    <div class="bg-white shadow rounded position-relative overflow-hidden">
+                        
+                        <div class="text-center">
+                            <ul class="nav nav-pills nav-justified flex-sm-row mb-0" id="pills-tab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link py-2 active rounded-0" id="User-login" data-bs-toggle="pill" href="#user" role="tab" aria-controls="user" aria-selected="false">
+                                        <div class="text-center py-2">
+                                            <h6 class="mb-0">Fill the form</h6>
+                                        </div>
+                                    </a><!--end nav link-->
+                                </li><!--end nav item-->                                                                   
+                            </ul>
+                        </div>
+                        <div class="tab-content" id="pills-tabContent">
+                            <div class="card border-0 tab-pane fade show active" id="user" role="tabpanel" aria-labelledby="User-login">
+                                
+                                
+                                <form class="card-body" method="POST">
+                                    {% csrf_token %}
+                                    <div class="row">
+
+                                        <div class="col-md-6">
+                                            <div class="mb-3">           
+                                                <label for="inputdriverCategory" class="form-label">Driver Category<span class="text-danger">*</span></label>
+                                                <div class="form-icon position-relative">
+                                                    <i data-feather="Category" class="fea icon-sm icons"></i>
+                                                    <select class="form-control ps-5" id="inputdriverCategory" name="driverCategory">   
+                                                        <option  value="Driver">Driver</option>
+                                                        <option value="Captain">Captain</option>
+                                                        <option value="Valet">Valet</option>
+                                                        <option value="Chauffeur">Chauffeur</option>
+                                                        <option value="School Bus Driver">School Bus Driver</option>
+                                                        <option value="Truck Driver">Truck Driver</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+
+                                        <div class="col-md-6">
+                                            <div class="mb-3">           
+                                                <label for="inputFName" class="form-label">Full Name <span class="text-danger">*</span></label>
+                                                <div class="form-icon position-relative">
+                                                    <i data-feather="user" class="fea icon-sm icons"></i>
+                                                    <input type="text" class="form-control ps-5" id="inputFName" name="fullname" placeholder="Full Name" required>
+                                                </div>
+                                            </div>
+                                        </div><!--end col-->
+
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="inputPhone" class="form-label">Phone <span class="text-danger">*</span></label>
+                                                <div class="form-icon position-relative">
+                                                        <i data-feather="phone" class="fea icon-sm icons"></i>
+                                                        <input type="number" maxlength="10" class="form-control ps-5" id="inputPhone" name="phone" placeholder="Phone Number" required>
+                                                </div>
+                                            </div>
+                                        </div><!--end col-->
+                                        
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="inputEmail" class="form-label">Email <span class="text-danger">*</span></label>
+                                                <div class="form-icon position-relative">
+                                                    <i data-feather="mail" class="fea icon-sm icons"></i>
+                                                    <input type="email" class="form-control ps-5"  name="email" id="inputEmail" placeholder="Email Address" required>
+                                                </div>
+                                            </div>
+                                        </div><!--end col-->
+    
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="inputCity" class="form-label">City <span class="text-danger">*</span></label>
+                                                <div class="form-icon position-relative">
+                                                    <i data-feather="globe" class="fea icon-sm icons"></i>
+                                                    <input type="text" class="form-control ps-5" id="inputCity" name="city" placeholder="Enter your City..." required>
+                                                    </div>
+                                            </div>
+                                        </div><!--end col-->
+    
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="vtype" class="form-label">Gear type <span class="text-danger">*</span></label>
+                                                <div class="form-icon position-relative">
+                                                        <i data-feather="life-buoy" class="fea icon-sm icons"></i>
+                                                    <select class="form-control ps-5" id="vtype" name="vtype">
+                                                        <option value="">Select</option>
+                                                        <option value="Manual-Diesel">Manual-Diesel</option>
+                                                        <option value="Manual-Petrol">Manual-Petrol</option>
+                                                        <option value="Manual-CNG">Manual-CNG</option>
+                                                        <option value="Automatic">Automatic</option>
+                                                        <option value="ALL">ALL</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div><!--end col-->
+    
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="vname" class="form-label">Car Type <span class="text-danger">*</span></label>
+                                                <div class="form-icon position-relative">
+                                                    <i data-feather="truck" class="fea icon-sm icons"></i>
+                                                    <select class="form-control ps-5" id="vname" name="vname">
+                                                        <option value="">----</option>
+                                                        <option value="SUV">SUV</option>
+                                                        <option value="Hatchback">Hatchback</option>
+                                                        <option value="Crossover">Crossover</option>
+                                                        <option value="Convertible">Convertible</option>
+                                                        <option value="Sedan">Sedan</option>
+                                                        <option value="Sports Car">Sports Car</option>
+                                                        <option value="Coupe">Coupe</option>
+                                                        <option value="Minivan">Minivan</option>
+                                                        <option value="Truck">Truck</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div><!--end col-->
+    
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="driving_licence_front" class="form-label">Driving licence front <span class="text-danger">*</span></label>
+                                                <input type="file" class="form-control" name="driving_licence_front" id="driving_licence_front">
+                                            </div>
+                                        </div><!--end col-->
+    
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="driving_licence_back" class="form-label">Driving licence back <span class="text-danger">*</span></label>
+                                                <input type="file" class="form-control" name="driving_licence_back" id="driving_licence_back">
+                                            </div>
+                                        </div><!--end col-->
+    
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="aadharcard_front" class="form-label">Aadhar card Front <span class="text-danger">*</span></label>
+                                                <input type="file" class="form-control" name="aadharcard_front" id="aadharcard_front">
+                                            </div>
+                                        </div><!--end col-->
+
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="aadharcard_back" class="form-label">Aadhar card Back <span class="text-danger">*</span></label>
+                                                <input type="file" class="form-control" name="aadharcard_back" id="aadharcard_back">
+                                            </div>
+                                        </div><!--end col-->
+                                        
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="pancard_front" class="form-label">Pan card Front <span class="text-danger">*</span></label>
+                                                <input type="file" class="form-control" name="pancard_front" id="pancard_front">
+                                            </div>
+                                        </div><!--end col-->
+
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="pancard_back" class="form-label">Pan card Back <span class="text-danger">*</span></label>
+                                                <input type="file" class="form-control" name="pancard_back" id="pancard_back">
+                                            </div>
+                                        </div><!--end col-->
+
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="inputPassword" class="form-label">Password <span class="text-danger">*</span></label>
+                                                <input type="password" class="form-control" name="pwd" id="inputPassword" placeholder="Enter your Password..." required onchange="form.cpwd.pattern = this.value">
+                                            </div>
+                                        </div><!--end col-->
+
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="inputconfirmPassword" class="form-label">Confirm Password <span class="text-danger">*</span></label>
+                                                <input type="password" class="form-control" name="cpwd" id="inputconfirmPassword" pattern="" placeholder="Enter your Password Again..." required>
+                                            </div>
+                                        </div><!--end col-->
+
+                                        <div class="col-md-12">
+                                            <div class="mb-3">
+                                                <label for="driver_profile" class="form-label">Your Photo <span class="text-danger">*</span></label>
+                                                <input type="file" class="form-control" name="driver_profile" id="driver_profile">
+                                            </div>
+                                        </div><!--end col-->
+    
+                                        <div class="col-md-12" id="error_message"></div>
+                                        
+                                        <div class="col-md-12 text-center mt-2 mb-3"> 
+                                            <button type="submit" id="send_driver_details" class="btn btn-primary">Submit</button>
+                                            {% if messages %}
+                                            {% for result  in messages %}
+                                                <h3 style="color: rgb(194, 6, 6);">{{ result }}</h3>
+                                            {% endfor %}
+                                            {% endif %}
+                                        </div><!--end col-->
+                                    </div><!--end row-->
+                                </form><!--end form-->
+                                
+                            </div><!--end teb pane-->                        
+                        </div><!--end tab content-->
+                    </div>
+                </div><!--end col-->
+            </div>
+        </div>
+    </section>
+    
+    <section class="section" id="viewteam">
+        <div class="container " style="margin-bottom:50px">
+            <div class="row justify-content-center">
+                <div class="col-12 text-center">
+                    <div class="section-title mb-4 pb-2">
+                        <h4 class="title mb-4">We provide benifits to our team</h4>
+                        <p class="text-muted para-desc mx-auto mb-0">DriveCare <span class="text-primary fw-bold">Advantage</span>  </p>
+                    </div>
+                </div><!--end col-->
+            </div><!--end row-->
+    
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-12 mt-5">
+                    <div class="features text-center">
+                        <div class="image position-relative d-inline-block">
+                            <img src="{% static 'images/hands.png' %}" class="avatar avatar-small" alt="hire driver company">
+                        </div>
+    
+                        <div class="content mt-4">
+                            <h4 class="title-2">Regular Trip</h4>
+                            <p class="text-muted mb-0">We are getting good amount of trips.So you dont have to wait for the drive.</p>
+                        </div>
+                    </div>
+                </div><!--end col-->
+                
+                <div class="col-lg-4 col-md-6 col-12 mt-5">
+                    <div class="features text-center">
+                        <div class="image position-relative d-inline-block">
+                            <img src="{% static 'images/t1.png' %}" class="avatar avatar-small" alt="Driver in india">
+                        </div>
+    
+                        <div class="content mt-4">
+                            <h4 class="title-2">Live Tracking</h4>
+                            <p class="text-muted mb-0">Track your customer location. It helps you to go on time.</p>
+                        </div>
+                    </div>
+                </div><!--end col-->
+                
+                <div class="col-lg-4 col-md-6 col-12 mt-5">
+                    <div class="features text-center">
+                        <div class="image position-relative d-inline-block">
+                            <img src="{% static 'images/r1.png' %}" class="avatar avatar-small" alt="Driver in india">
+                        </div>
+    
+                        <div class="content mt-4">
+                            <h4 class="title-2">Good Earning</h4>
+                            <p class="text-muted mb-0">Our priority is happy team, we spend most of the payment on our team.</p>
+                        </div>
+                    </div>
+                </div><!--end col-->
+    
+                <div class="col-lg-4 col-md-6 col-12 mt-5">
+                    <div class="features text-center">
+                        <div class="image position-relative d-inline-block">
+                            <img src="{% static 'images/d1.png' %}" class="avatar avatar-small" alt="Driver in india">
+                        </div>
+    
+                        <div class="content mt-4">
+                            <h4 class="title-2">Ontime Payment</h4>
+                            <p class="text-muted mb-0">We settle payment on the same day when you request us.</p>
+                        </div>
+                    </div>
+                </div><!--end col-->
+                
+                <div class="col-lg-4 col-md-6 col-12 mt-5">
+                    <div class="features text-center">
+                        <div class="image position-relative d-inline-block">
+                            <img src="{% static 'images/i1.png' %}" class="avatar avatar-small" alt="Driver in india">
+                        </div>
+    
+                        <div class="content mt-4">
+                            <h4 class="title-2">Medical Insurance</h4>
+                            <p class="text-muted mb-0">Our all teams are insured from the first day of work.</p>
+                        </div>
+                    </div>
+                </div><!--end col-->
+    
+                <div class="col-lg-4 col-md-6 col-12 mt-5">
+                    <div class="features text-center">
+                        <div class="image position-relative d-inline-block">
+                            <img src="{% static 'images/h1.png' %}" class="avatar avatar-small" alt="Driver in india">
+                        </div>
+    
+                        <div class="content mt-4">
+                            <h4 class="title-2">Flexible Timing</h4>
+                            <p class="text-muted mb-0">You can choose your work time. Drive as you want. </p>
+                        </div>
+                    </div>
+                </div><!--end col-->
+            </div><!--end row-->
+        </div><!--end container-->
+    </section>
+</div>
+    {% include 'customer/include/footer.html' %}
+    {% endblock content %}
+
+{% block script %}
+{% endblock script %}

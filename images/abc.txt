@@ -1,0 +1,682 @@
+{% extends 'customer/layouts/base.html' %}
+{% load static %}
+
+{% block head %}
+
+{% endblock head %}
+
+{% block content %}
+{% include 'customer/include/header.html' %}
+
+<div id="map" style="display: none;"></div>
+
+<style type="stylesheet" href="https://drivars.com/css/booking.css?v=1676870301"></style>
+<style type="stylesheet" href="https://drivars.com/css/bootstrap.min.css"></style>
+<style type="stylesheet" href="https://drivars.com/css/style.min.css"></style>
+<style type="stylesheet" href="https://drivars.com/css/colors/default.css"></style>
+
+
+<div id="ajax_dashboard">
+    <section class="section bg-light" style="margin-top: 80px; padding-top: 30px; padding-bottom: 50px;">
+        <div class="container">
+
+
+            <div id="map" style="display: none;" class="mapboxgl-map">
+                <div class="mapboxgl-canary" style="visibility: hidden;">
+                </div>
+                <div
+                    class="mapboxgl-canvas-container mapboxgl-interactive mapboxgl-touch-drag-pan mapboxgl-touch-zoom-rotate">
+                    <canvas class="mapboxgl-canvas" tabindex="0" aria-label="Map" role="region" width="500" height="375"
+                        style="width: 400px; height: 300px;">
+                    </canvas>
+                </div>
+                <div class="mapboxgl-control-container">
+                    <div class="mapboxgl-ctrl-top-left"></div>
+                    <div class="mapboxgl-ctrl-top-right"></div>
+                    <div class="mapboxgl-ctrl-bottom-left">
+                        <div class="mapboxgl-ctrl" style="display: block;">
+                            <a class="mapboxgl-ctrl-logo mapboxgl-compact" target="_blank" rel="noopener nofollow"
+                                href="https://www.mapbox.com/" aria-label="Mapbox logo">
+
+                            </a>
+                        </div>
+                    </div>
+                    <div class="mapboxgl-ctrl-bottom-right">
+                        <div class="mapboxgl-ctrl mapboxgl-ctrl-attrib mapboxgl-compact">
+                            <button class="mapboxgl-ctrl-attrib-button" type="button" aria-label="Toggle attribution">
+                                <span class="mapboxgl-ctrl-icon" aria-hidden="true" title="Toggle attribution"></span>
+                            </button>
+                            <div class="mapboxgl-ctrl-attrib-inner" role="list">
+                                <a href="https://www.mapbox.com/about/maps/" target="_blank" title="Mapbox"
+                                    aria-label="Mapbox" role="listitem">© Mapbox</a>
+                                <a href="https://www.openstreetmap.org/about/" target="_blank" title="OpenStreetMap"
+                                    aria-label="OpenStreetMap" role="listitem">© OpenStreetMap</a>
+                                <a class="mapbox-improve-map"
+                                    href="https://apps.mapbox.com/feedback/?owner=mapbox&amp;id=streets-v11&amp;access_token=pk.eyJ1IjoiZHJpdmFycy1jbG91ZHM0NCIsImEiOiJja3VyeG94aWYwaW80MndvMnVkNnU2NXNsIn0.CCUAWYSOfbZcHkq4bGFWIg"
+                                    target="_blank" title="Improve this map" aria-label="Map feedback" role="listitem"
+                                    rel="noopener nofollow">Improve this map</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-fluid booking_section">
+            </div>
+        </div>
+    </section>
+</div>
+
+
+<input type="hidden" name="recent_click" id="recent_click" value="final_book">
+<input type="hidden" name="billing_phone" id="billing_phone" value="">
+<input type="hidden" name="billing_name" id="billing_name" value="">
+<input type="hidden" name="billing_email" id="billing_email" value="">
+<input type="hidden" name="cityid" id="cityid" value="18">
+<input type="hidden" name="duration" id="duration" value="">
+<input type="hidden" name="estimate_amount_val" id="estimate_amount_val" value="0">
+<input type="hidden" name="discount_amount" id="discount_amount" value="0">
+<input type="hidden" name="night_charge" id="night_charge" value="0">
+<input type="hidden" name="night_stay_charge" id="night_stay_charge" value="0">
+<input type="hidden" name="payble_amount" id="payble_amount" value="0">
+<input type="hidden" name="ap_code_final" id="ap_code_final" value="">
+<input type="hidden" name="promo_amount" id="promo_amount" value="0">
+<input type="hidden" name="food_charge" id="food_charge" value="0">
+<input type="hidden" name="total_km" id="total_km" value="0">
+<input type="hidden" name="total_night" id="total_night" value="0">
+
+
+
+
+
+<section style="margin-top:50px; margin-bottom: 50px;">
+    <div class="container">
+        <div class="section-title text-center text-md-start">
+            <h6 class="text-primary">Pay Monthly</h6>
+            <h4 class="title mb-4">For Business Users</h4>
+
+        </div>
+        <div class="row" id="for_business_user">
+            <div class="col-lg-2 col-md-4 col-6 mt-4 pt-2">
+                <div class="card explore-feature border-1 rounded text-center bg-white">
+                    <a href="javascript:void(0);" id="for_business_user_sub" fdi="chauffeur">
+                        <div class="card-body" fdi="chauffeur">
+                            <div class="icon rounded-circle shadow-lg d-inline-block">
+                                <img src="{% static 'img/driver.png' %}" class="mt-16 avatar avatar-md-sm"
+                                    alt="Car Driver hire">
+                            </div>
+                            <div class="content mt-3">
+                                <h6 class="mb-0"><a href="javascript:void(0);" class="title text-dark"
+                                        id="for_business_user_sub" fdi="chauffeur">Car Driver</a></h6>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div><!--end col-->
+
+            <div class="col-lg-2 col-md-4 col-6 mt-4 pt-2">
+                <div class="card explore-feature border-1 rounded text-center bg-white">
+                    <a href="javascript:void(0);" id="for_business_user_sub" fdi="truck-driver">
+                        <div class="card-body" fdi="Truck Driver">
+                            <div class="icon rounded-circle shadow-lg d-inline-block">
+                                <img src="{% static 'img/truck.png' %}" class="mt-16 avatar avatar-md-sm"
+                                    alt="Truck Driver hire">
+                            </div>
+                            <div class="content mt-3">
+                                <h6 class="mb-0"><a href="javascript:void(0);" class="title text-dark"
+                                        id="for_business_user_sub" fdi="truck-driver">Truck Driver</a></h6>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div><!--end col-->
+            <div class="col-lg-2 col-md-4 col-6 mt-4 pt-2">
+                <div class="card explore-feature border-1 rounded text-center bg-white">
+                    <a href="javascript:void(0);" id="for_business_user_sub" fdi="bus-driver">
+                        <div class="card-body" fdi="Bus Driver">
+                            <div class="icon rounded-circle shadow-lg d-inline-block">
+                                <img src="{% static 'img/bus.png' %}" class="mt-16 avatar avatar-md-sm"
+                                    alt="Bus Driver hire">
+                            </div>
+                            <div class="content mt-3">
+                                <h6 class="mb-0"><a href="javascript:void(0);" class="title text-dark"
+                                        id="for_business_user_sub" fdi="bus-driver">Bus Driver</a></h6>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div><!--end col-->
+            <div class="col-lg-2 col-md-4 col-6 mt-4 pt-2">
+                <div class="card explore-feature border-1 rounded text-center bg-white">
+                    <a href="javascript:void(0);" id="for_business_user_sub" fdi="school-bus">
+                        <div class="card-body" fdi="School Bus">
+                            <div class="icon rounded-circle shadow-lg d-inline-block">
+                                <img src="{% static 'img/sbus.png' %}" class="mt-16 avatar avatar-md-sm"
+                                    alt="School Bus driver">
+                            </div>
+                            <div class="content mt-3">
+                                <h6 class="mb-0"><a href="javascript:void(0);" class="title text-dark"
+                                        id="for_business_user_sub" fdi="school-bus">School Bus</a></h6>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div><!--end col-->
+            <div class="col-lg-2 col-md-4 col-6 mt-4 pt-2">
+                <div class="card explore-feature border-1 rounded text-center bg-white">
+                    <a href="javascript:void(0);" id="for_business_user_sub" fdi="van-driver">
+                        <div class="card-body" fdi="Van Driver">
+                            <div class="icon rounded-circle shadow-lg d-inline-block">
+                                <img src="{% static 'img/van.png' %}" class="mt-16 avatar avatar-md-sm"
+                                    alt="Van Driver">
+                            </div>
+                            <div class="content mt-3">
+                                <h6 class="mb-0"><a href="javascript:void(0);" class="title text-dark"
+                                        id="for_business_user_sub" fdi="van-driver">Van Driver</a></h6>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div><!--end col-->
+            <div class="col-lg-2 col-md-4 col-6 mt-4 pt-2">
+                <div class="card explore-feature border-1 rounded text-center bg-white">
+                    <a href="javascript:void(0);" id="for_business_user_sub" fdi="valet">
+                        <div class="card-body" fdi="Valet">
+                            <div class="icon rounded-circle shadow-lg d-inline-block">
+                                <img src="{% static 'img/valet_c.png' %}" class="mt-16 avatar avatar-md-sm"
+                                    alt="Valet Parking">
+                            </div>
+                            <div class="content mt-3">
+                                <h6 class="mb-0"><a href="javascript:void(0);" class="title text-dark"
+                                        id="for_business_user_sub" fdi="valet">Valet Parking</a></h6>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div><!--end col-->
+        </div>
+    </div>
+</section>
+
+
+
+
+
+<section>
+    <div class="container">
+        <div class="section-title text-center text-md-start">
+            <h6 class="text-primary">Quality & Trust</h6>
+            <h4 class="title mb-4">Why Hire Team DriveCare?</h4>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-4 mt-4 pt-2">
+                <div
+                    class="card features fea-primary rounded p-4 bg-light text-center position-relative overflow-hidden border-0">
+                    <span class="h1 icon2 text-primary">
+                        <i class="uil uil-shield-check"></i>
+                    </span>
+                    <div class="card-body p-0 content">
+                        <h5>Hassle Free Booking</h5>
+                        <p class="para text-muted mb-0">Book driver online. To go anywhere in India</p>
+                    </div>
+                    <span class="big-icon text-center">
+                        <i class="uil uil-shield-check"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 mt-4 pt-2">
+                <div
+                    class="card features fea-primary rounded p-4 bg-light text-center position-relative overflow-hidden border-0">
+                    <span class="h1 icon2 text-primary">
+                        <i class="uil uil-thumbs-up"></i>
+                    </span>
+                    <div class="card-body p-0 content">
+                        <h5>Transparent Pricing</h5>
+                        <p class="para text-muted mb-0">No hidden charges. Enjoy the most affordable rates for the
+                            driver </p>
+                    </div>
+                    <span class="big-icon text-center">
+                        <i class="uil uil-thumbs-up"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 mt-4 pt-2">
+                <div
+                    class="card features fea-primary rounded p-4 bg-light text-center position-relative overflow-hidden border-0">
+                    <span class="h1 icon2 text-primary">
+                        <i class="uil uil-keyboard-show"></i>
+                    </span>
+                    <div class="card-body p-0 content">
+                        <h5>Real Time Tracking</h5>
+                        <p class="para text-muted mb-0">Track your driver movement across the Ahmedabad with our
+                            app.</p>
+                    </div>
+                    <span class="big-icon text-center">
+                        <i class="uil uil-keyboard-show"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 mt-4 pt-2">
+                <div
+                    class="card features fea-primary rounded p-4 bg-light text-center position-relative overflow-hidden border-0">
+                    <span class="h1 icon2 text-primary">
+                        <i class="uil uil-award"></i>
+                    </span>
+                    <div class="card-body p-0 content">
+                        <h5>Safe & Reliable Team</h5>
+                        <p class="para text-muted mb-0">Superior safety ensured by our professional partners.</p>
+                    </div>
+                    <span class="big-icon text-center">
+                        <i class="uil uil-award"></i>
+                    </span>
+                </div>
+            </div>
+
+
+        </div><!--end row-->
+    </div><!--end container-->
+
+    <div class="container" style="margin-top:30px;" id="package">
+        <div class="row align-items-end mb-4 pb-2">
+            <div class="col-md-8">
+
+                <div class="section-title text-center text-md-start">
+                    <h6 class="text-primary">Find Out Most</h6>
+                    <h4 class="title mb-4">Popular Destination Packages</h4>
+
+                </div>
+            </div><!--end col-->
+
+            <div class="col-md-4 mt-4 mt-sm-0">
+                <div class="text-center text-md-end">
+                    <a id="city_packages" fdi="ahmedabad" href="javascript:void(0);" class="text-primary h6">See
+                        More <i data-feather="arrow-right" class="fea icon-sm"></i></a>
+                </div>
+            </div><!--end col-->
+        </div><!--end row-->
+    </div><!--end container-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 mt-4 pt-2">
+                <div class="tiny-six-item">
+                    <div class="tiny-slide">
+                        <div class="popular-tour rounded-md position-relative overflow-hidden mx-2">
+                            <img src="{% static 'v2/admin/images/package/1658832992mount%20abu.jpg' %}"
+                                class="img-fluid" alt="Driver in Ahmedabad">
+                            <div class="overlay-work bg-dark"></div>
+                            <div class="content">
+                                <a id="package_id_session"
+                                    fdi="855e7b1f281907b4a5af46d0756bcf5147f65a5a9140efe6e8e8e0f20a0207b117"
+                                    href="javascript:void(0);" class="title text-white h4 title-dark">Mount Abu, Abu
+                                    Road, Sirohi, Rajasthan, India</a>
+                            </div>
+                        </div><!--end tour post-->
+                    </div>
+                    <div class="tiny-slide">
+                        <div class="popular-tour rounded-md position-relative overflow-hidden mx-2">
+                            <img src="{% static 'v2/admin/images/package/1658836127rajkot.jpg'%}" class="img-fluid"
+                                alt="Driver in Ahmedabad">
+                            <div class="overlay-work bg-dark"></div>
+                            <div class="content">
+                                <a id="package_id_session"
+                                    fdi="855e7b1f281907b4a5af46d0756bcf5148f65a5a9140efe6e8e8e0f20a0207b117"
+                                    href="javascript:void(0);" class="title text-white h4 title-dark">Rajkot,
+                                    Gujarat, India</a>
+                            </div>
+                        </div><!--end tour post-->
+                    </div>
+                    <div class="tiny-slide">
+                        <div class="popular-tour rounded-md position-relative overflow-hidden mx-2">
+                            <img src="{%static 'v2/admin/images/package/1658836960bhuj.jpg'%}" class="img-fluid"
+                                alt="Driver in Ahmedabad">
+                            <div class="overlay-work bg-dark"></div>
+                            <div class="content">
+                                <a id="package_id_session"
+                                    fdi="855e7b1f281907b4a5af46d0756bcf5149f65a5a9140efe6e8e8e0f20a0207b117"
+                                    href="javascript:void(0);" class="title text-white h4 title-dark">Bhuj, Gujarat,
+                                    India</a>
+                            </div>
+                        </div><!--end tour post-->
+                    </div>
+                    <div class="tiny-slide">
+                        <div class="popular-tour rounded-md position-relative overflow-hidden mx-2">
+                            <img src="{% static 'v2/admin/images/package/1658837416surat.jpg' %}" class="img-fluid"
+                                alt="Driver in Ahmedabad">
+                            <div class="overlay-work bg-dark"></div>
+                            <div class="content">
+                                <a id="package_id_session"
+                                    fdi="855e7b1f281907b4a5af46d0756bcf5150f65a5a9140efe6e8e8e0f20a0207b117"
+                                    href="javascript:void(0);" class="title text-white h4 title-dark">Surat,
+                                    Gujarat, India</a>
+                            </div>
+                        </div><!--end tour post-->
+                    </div>
+                    <div class="tiny-slide">
+                        <div class="popular-tour rounded-md position-relative overflow-hidden mx-2">
+                            <img src="{% static 'v2/admin/images/package/1658837937dwarka.jpg' %}" class="img-fluid"
+                                alt="Driver in Ahmedabad">
+                            <div class="overlay-work bg-dark"></div>
+                            <div class="content">
+                                <a id="package_id_session"
+                                    fdi="855e7b1f281907b4a5af46d0756bcf5151f65a5a9140efe6e8e8e0f20a0207b117"
+                                    href="javascript:void(0);" class="title text-white h4 title-dark">Dwarka,
+                                    Gujarat, India</a>
+                            </div>
+                        </div><!--end tour post-->
+                    </div>
+                    <div class="tiny-slide">
+                        <div class="popular-tour rounded-md position-relative overflow-hidden mx-2">
+                            <img src="{% static 'v2/admin/images/package/1658838353vadodara.jpg' %}" class="img-fluid"
+                                alt="Driver in Ahmedabad">
+                            <div class="overlay-work bg-dark"></div>
+                            <div class="content">
+                                <a id="package_id_session"
+                                    fdi="855e7b1f281907b4a5af46d0756bcf5152f65a5a9140efe6e8e8e0f20a0207b117"
+                                    href="javascript:void(0);" class="title text-white h4 title-dark">Vadodara,
+                                    Gujarat, India</a>
+                            </div>
+                        </div><!--end tour post-->
+                    </div>
+                    <div class="tiny-slide">
+                        <div class="popular-tour rounded-md position-relative overflow-hidden mx-2">
+                            <img src="{% static 'v2/admin/images/package/1658838507ambaji.jpg' %}" class="img-fluid"
+                                alt="Driver in Ahmedabad">
+                            <div class="overlay-work bg-dark"></div>
+                            <div class="content">
+                                <a id="package_id_session"
+                                    fdi="855e7b1f281907b4a5af46d0756bcf5153f65a5a9140efe6e8e8e0f20a0207b117"
+                                    href="javascript:void(0);" class="title text-white h4 title-dark">Ambaji,
+                                    Gujarat, India</a>
+                            </div>
+                        </div><!--end tour post-->
+                    </div>
+                    <div class="tiny-slide">
+                        <div class="popular-tour rounded-md position-relative overflow-hidden mx-2">
+                            <img src="{% static 'v2/admin/images/package/1658840618bhavnagar.jpg' %}" class="img-fluid"
+                                alt="Driver in Ahmedabad">
+                            <div class="overlay-work bg-dark"></div>
+                            <div class="content">
+                                <a id="package_id_session"
+                                    fdi="855e7b1f281907b4a5af46d0756bcf5154f65a5a9140efe6e8e8e0f20a0207b117"
+                                    href="javascript:void(0);" class="title text-white h4 title-dark">Bhavnagar,
+                                    Gujarat, India</a>
+                            </div>
+                        </div><!--end tour post-->
+                    </div>
+                    <div class="tiny-slide">
+                        <div class="popular-tour rounded-md position-relative overflow-hidden mx-2">
+                            <img src="{% static 'v2/admin/images/package/1658840948indore.jpg' %}" class="img-fluid"
+                                alt="Driver in Ahmedabad">
+                            <div class="overlay-work bg-dark"></div>
+                            <div class="content">
+                                <a id="package_id_session"
+                                    fdi="855e7b1f281907b4a5af46d0756bcf5159f65a5a9140efe6e8e8e0f20a0207b117"
+                                    href="javascript:void(0);" class="title text-white h4 title-dark">Indore, Madhya
+                                    Pradesh, India</a>
+                            </div>
+                        </div><!--end tour post-->
+                    </div>
+                    <div class="tiny-slide">
+                        <div class="popular-tour rounded-md position-relative overflow-hidden mx-2">
+                            <img src="{% static 'v2/admin/images/package/1658841228somnath.jpg' %}" class="img-fluid"
+                                alt="Driver in Ahmedabad">
+                            <div class="overlay-work bg-dark"></div>
+                            <div class="content">
+                                <a id="package_id_session"
+                                    fdi="855e7b1f281907b4a5af46d0756bcf5160f65a5a9140efe6e8e8e0f20a0207b117"
+                                    href="javascript:void(0);" class="title text-white h4 title-dark">Somnath,
+                                    Somnath, Veraval, Gujarat, India</a>
+                            </div>
+                        </div><!--end tour post-->
+                    </div>
+                    <div class="tiny-slide">
+                        <div class="popular-tour rounded-md position-relative overflow-hidden mx-2">
+                            <img src="{% static 'v2/admin/images/package/1658840773jamnagar' %}.jpg" class="img-fluid"
+                                alt="Driver in Ahmedabad">
+                            <div class="overlay-work bg-dark"></div>
+                            <div class="content">
+                                <a id="package_id_session"
+                                    fdi="855e7b1f281907b4a5af46d0756bcf5157f65a5a9140efe6e8e8e0f20a0207b117"
+                                    href="javascript:void(0);" class="title text-white h4 title-dark">Jamnagar,
+                                    Gujarat, India</a>
+                            </div>
+                        </div><!--end tour post-->
+                    </div>
+                    <div class="tiny-slide">
+                        <div class="popular-tour rounded-md position-relative overflow-hidden mx-2">
+                            <img src="{% static 'admin/images/package/1658840825mumbai.jpg' %}" class="img-fluid"
+                                alt="Driver in Ahmedabad">
+                            <div class="overlay-work bg-dark"></div>
+                            <div class="content">
+                                <a id="package_id_session"
+                                    fdi="855e7b1f281907b4a5af46d0756bcf5158f65a5a9140efe6e8e8e0f20a0207b117"
+                                    href="javascript:void(0);" class="title text-white h4 title-dark">Mumbai,
+                                    Maharashtra, India</a>
+                            </div>
+                        </div><!--end tour post-->
+                    </div>
+
+                </div>
+            </div><!--end col-->
+        </div><!--end row-->
+    </div>
+</section><!--end section-->
+
+
+
+
+
+
+<section style="padding-bottom: 50px;">
+    <div class="container mt-100 mt-60">
+        <div class="row align-items-center">
+            <div class="col-lg-5 col-md-6 order-1 order-md-2">
+                <div class="text-end">
+                    <img src="{% static 'images/custo.png' %}" class="img-fluid" alt="Driver in Ahmedabad">
+                </div>
+            </div><!--end col-->
+
+            <div class="col-lg-7 col-md-6 order-2 order-md-1 mt-4 pt-2 mt-sm-0 pt-sm-0">
+                <div class="section-title text-md-start text-center">
+                    <h4 class="title mb-4">Whats our clients said <br> about services</h4>
+                    <p class="text-muted mb-0 para-desc">Start working with <span
+                            class="text-primary fw-bold">Drivars</span> that can provide you affordable services.
+                    </p>
+
+                    <div class="row justify-content-center">
+                        <div class="col-lg-12 mt-4">
+                            <div class="tiny-single-item">
+                                <div class="tiny-slide">
+                                    <div class="d-flex client-testi m-2">
+
+                                        <div class="flex-1 content p-3 shadow rounded bg-white position-relative">
+                                            <ul class="list-unstyled mb-0">
+                                                <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i>
+                                                </li>
+                                                <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i>
+                                                </li>
+                                                <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i>
+                                                </li>
+                                                <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i>
+                                                </li>
+                                                <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i>
+                                                </li>
+                                            </ul>
+                                            <p class="text-muted mt-2">" I am happy, i can get driver services at my
+                                                location, its easy to hire, hassle free payment and getting
+                                                professional chauffeur services from months. "</p>
+                                            <h6 class="text-primary">- Abhishek Nayak <small
+                                                    class="text-muted">C.E.O</small></h6>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="tiny-slide">
+                                    <div class="d-flex client-testi m-2">
+
+                                        <div class="flex-1 content p-3 shadow rounded bg-white position-relative">
+                                            <ul class="list-unstyled mb-0">
+                                                <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i>
+                                                </li>
+                                                <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i>
+                                                </li>
+                                                <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i>
+                                                </li>
+                                                <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i>
+                                                </li>
+                                                <li class="list-inline-item"><i
+                                                        class="mdi mdi-star-half text-warning"></i></li>
+                                            </ul>
+                                            <p class="text-muted mt-2">"Thanks Team Drivars for your professional
+                                                work, always ontime, good driving skills, and very trust worthy, me
+                                                and my family enjoying your services."</p>
+                                            <h6 class="text-primary">- Shreya Gangil<small class="text-muted"> House
+                                                    Wife</small></h6>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="tiny-slide">
+                                    <div class="d-flex client-testi m-2">
+
+                                        <div class="flex-1 content p-2 shadow rounded bg-white position-relative">
+                                            <ul class="list-unstyled mb-0">
+                                                <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i>
+                                                </li>
+                                                <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i>
+                                                </li>
+                                                <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i>
+                                                </li>
+                                                <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i>
+                                                </li>
+                                                <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i>
+                                                </li>
+                                            </ul>
+                                            <p class="text-muted mt-2">" My experience with team drivars is very
+                                                good, I have 6 drivers for my heavy vehicles and i am happy with
+                                                services. "</p>
+                                            <h6 class="text-primary">- Abid Khan <small class="text-muted">Business
+                                                    Owner</small></h6>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="tiny-slide">
+                                    <div class="d-flex client-testi m-2">
+
+                                        <div class="flex-1 content p-3 shadow rounded bg-white position-relative">
+                                            <ul class="list-unstyled mb-0">
+                                                <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i>
+                                                </li>
+                                                <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i>
+                                                </li>
+                                                <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i>
+                                                </li>
+                                                <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i>
+                                                </li>
+                                                <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i>
+                                                </li>
+                                            </ul>
+                                            <p class="text-muted mt-2">" Our experience with drivars services is
+                                                really nice, we are using valet and chauffeur services for my hotel
+                                                chain and i can say in one word fantastic :)"</p>
+                                            <h6 class="text-primary">- Shobhit Chakravarthi <small
+                                                    class="text-muted">General Manager</small></h6>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="tiny-slide">
+                                    <div class="d-flex client-testi m-2">
+
+                                        <div class="flex-1 content p-3 shadow rounded bg-white position-relative">
+                                            <ul class="list-unstyled mb-0">
+                                                <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i>
+                                                </li>
+                                                <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i>
+                                                </li>
+                                                <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i>
+                                                </li>
+                                                <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i>
+                                                </li>
+                                                <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i>
+                                                </li>
+                                            </ul>
+                                            <p class="text-muted mt-2">" Services are good i am using for every
+                                                outstation trip with friends and family. Overall i am very happy you
+                                                guys are professional and skilled."</p>
+                                            <h6 class="text-primary">- John albert <small
+                                                    class="text-muted">Traveler</small></h6>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="tiny-slide">
+                                    <div class="d-flex client-testi m-2">
+
+                                        <div class="flex-1 content p-3 shadow rounded bg-white position-relative">
+                                            <ul class="list-unstyled mb-0">
+                                                <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i>
+                                                </li>
+                                                <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i>
+                                                </li>
+                                                <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i>
+                                                </li>
+                                                <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i>
+                                                </li>
+                                                <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i>
+                                                </li>
+                                            </ul>
+                                            <p class="text-muted mt-2">" We are using driver services for our school
+                                                van and buses. Drivars team are really good we can trust on it for
+                                                our students and teachers vehicles. "</p>
+                                            <h6 class="text-primary">- Amitabh Khare <small class="text-muted">School
+                                                    HR</small></h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!--end col-->
+                    </div><!--end row-->
+                </div>
+            </div><!--end col-->
+        </div><!--end row-->
+    </div>
+</section>
+
+
+
+{% include 'customer/include/footer.html' %}
+{% endblock content %}
+
+
+
+{% block script %}
+
+<script src="{% static 'code.jquery.com/jquery-3.6.0.js' %}"></script>
+<!-- javascript -->
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+<!-- SLIDER -->
+<script src="{% static 'js/tiny-slider.js' %}"></script>
+<script src="{% static 'js/tiny-slider-init.js' %}"></script>
+<!-- Icons -->
+<script src="{% static 'js/feather.min.js' %}"></script>
+<!-- Switcher -->
+<script src="{% static 'js/switcher.js' %}"></script>
+<!-- Main Js -->
+<script src="{% static 'js/app.js' %}"></script>
+<script src="{% static 'www.gstatic.com/firebasejs/6.0.2/firebase.js' %}"></script>
+<script type="text/javascript" src="{% static 'cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js' %}"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+<script src="{% static 'maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js ' %}"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+<script type="text/javascript" src="{% static 'js/jquery.basictable.js' %}"></script>
+<script src="{% static 'custom_js/my0bd8.js' %}"></script>
+<script src="{% static 'js/my0bd8.js' %}"></script>
+<script src="{% static 'cdn.socket.io/3.1.3/socket.io.min.js' %}"></script>
+
+{% endblock script %}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+<!--Page Content-->
+
+{% block content %}
+
+<div class="container card p-3 mt-5 border-dark" style="width: 95%;">
+    <a href="{% url 'data_create' %}" class="btn btn-outline-primary mb-3">Home</a>
+    <h5 class="text-center">List of Candidate</h5>
+    <table class="table table-border text-center">
+        <thead class="table-secondary">
+            <tr>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Gender</th>
+                <th>Career</th>
+            </tr>
+        </thead>
+        <!--DATA from DB-->
+        {% for data in data_read %}
+            <tr>
+                <td>{{ data.name }}</td>
+                <td>{{ data.phone }}</td>
+                <td>{{ data.email }}</td>
+                <td>{{ data.gender }}</td>
+                <td>{{ data.career }}</td>
+
+            </tr>
+        {% endfor %}
+    </table>
+
+</div>
+{% endblock content %}

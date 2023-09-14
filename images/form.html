@@ -1,0 +1,181 @@
+<form class="card-body" method="POST">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="inputdriverCategory" class="form-label">Driver Category<span
+                        class="text-danger">*</span></label>
+                <div class="form-icon position-relative">
+                    <i data-feather="Category" class="fea icon-sm icons"></i>
+                    <select class="form-control ps-5" id="inputdriverCategory" name="driverCategory">
+                        <option value="1">Driver</option>
+                        <option value="2">Captain</option>
+                        <option value="3">Valet</option>
+                        <option value="4">Chauffeur</option>
+                        <option value="5">School Bus Driver</option>
+                        <option value="6">Truck Driver</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="inputFName" class="form-label">Full Name <span class="text-danger">*</span></label>
+                <div class="form-icon position-relative">
+                    <i data-feather="user" class="fea icon-sm icons"></i>
+                    <input type="text" class="form-control ps-5" id="inputFName" name="fullname" placeholder="Full Name"
+                        required>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="inputPhone" class="form-label">Phone <span class="text-danger">*</span></label>
+                <div class="form-icon position-relative">
+                    <i data-feather="phone" class="fea icon-sm icons"></i>
+                    <input type="number" maxlength="10" class="form-control ps-5" id="inputPhone" name="phone"
+                        placeholder="Phone Number" required>
+                </div>
+            </div>
+        </div>end col
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="inputEmail" class="form-label">Email <span class="text-danger">*</span></label>
+                <div class="form-icon position-relative">
+                    <i data-feather="mail" class="fea icon-sm icons"></i>
+                    <input type="email" class="form-control ps-5" name="email" id="inputEmail"
+                        placeholder="Email Address" required>
+                </div>
+            </div>
+        </div>end col
+
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="inputCity" class="form-label">City <span class="text-danger">*</span></label>
+                <div class="form-icon position-relative">
+                    <i data-feather="globe" class="fea icon-sm icons"></i>
+                    <input type="text" class="form-control ps-5" id="inputCity" name="city"
+                        placeholder="Enter your City..." required>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="vtype" class="form-label">Gear type <span class="text-danger">*</span></label>
+                <div class="form-icon position-relative">
+                    <i data-feather="life-buoy" class="fea icon-sm icons"></i>
+                    <select class="form-control ps-5" id="vtype" name="vtype">
+                        <option value="">Select</option>
+                        <option value="Manual-Diesel">Manual-Diesel</option>
+                        <option value="Manual-Petrol">Manual-Petrol</option>
+                        <option value="Manual-CNG">Manual-CNG</option>
+                        <option value="Automatic">Automatic</option>
+                        <option value="ALL">ALL</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="vname" class="form-label">Car Type <span class="text-danger">*</span></label>
+                <div class="form-icon position-relative">
+                    <i data-feather="truck" class="fea icon-sm icons"></i>
+                    <select class="form-control ps-5" id="vname" name="vname">
+                        <option value="">----</option>
+                        <option value="SUV">SUV</option>
+                        <option value="Hatchback">Hatchback</option>
+                        <option value="Crossover">Crossover</option>
+                        <option value="Convertible">Convertible</option>
+                        <option value="Sedan">Sedan</option>
+                        <option value="Sports Car">Sports Car</option>
+                        <option value="Coupe">Coupe</option>
+                        <option value="Minivan">Minivan</option>
+                        <option value="Truck">Truck</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="driving_licence_front" class="form-label">Driving licence front <span
+                        class="text-danger">*</span></label>
+                <input type="file" class="form-control" name="driving_licence_front" id="driving_licence_front">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="driving_licence_back" class="form-label">Driving licence back <span
+                        class="text-danger">*</span></label>
+                <input type="file" class="form-control" name="driving_licence_back" id="driving_licence_back">
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="aadharcard_front" class="form-label">Aadhar card Front <span
+                        class="text-danger">*</span></label>
+                <input type="file" class="form-control" name="aadharcard_front" id="aadharcard_front">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="aadharcard_back" class="form-label">Aadhar card Back <span
+                        class="text-danger">*</span></label>
+                <input type="file" class="form-control" name="aadharcard_back" id="aadharcard_back">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="pancard_front" class="form-label">Pan card Front <span class="text-danger">*</span></label>
+                <input type="file" class="form-control" name="pancard_front" id="pancard_front">
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="pancard_back" class="form-label">Pan card Back <span class="text-danger">*</span></label>
+                <input type="file" class="form-control" name="pancard_back" id="pancard_back">
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="inputPassword" class="form-label">Password <span class="text-danger">*</span></label>
+                <input type="password" class="form-control" name="pwd" id="inputPassword"
+                    placeholder="Enter your Password..." required onchange="form.cpwd.pattern = this.value">
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="inputconfirmPassword" class="form-label">Confirm Password <span
+                        class="text-danger">*</span></label>
+                <input type="password" class="form-control" name="cpwd" id="inputconfirmPassword" pattern=""
+                    placeholder="Enter your Password Again..." required>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="mb-3">
+                <label for="driver_profile" class="form-label">Your Photo <span class="text-danger">*</span></label>
+                <input type="file" class="form-control" name="driver_profile" id="driver_profile">
+            </div>
+        </div>
+
+        <div class="col-md-12" id="error_message"></div>
+
+        <div class="col-md-12 text-center mt-2 mb-3">
+            <button type="submit" id="send_driver_details" class="btn btn-primary">Submit</button>
+            {% if messages %}
+            {% for result in messages %}
+            <h3 style="color: rgb(194, 6, 6);">{{ result }}</h3>
+            {% endfor %}
+            {% endif %}
+        </div>
+        <!-- </div> 
+                                </form> -->
